@@ -2,6 +2,24 @@
 #include <stdio.h>
 #include "binary_trees.h"
 
+/* Our own functions */
+
+/**
+ * test_leaf - Test the `binary_tree_is_leaf` function
+ *
+ * @node: Pointer to the node to test
+ */
+void test_leaf(const binary_tree_t *node)
+{
+	int leaf;
+
+	leaf = binary_tree_is_leaf(node);
+	if (node)
+		printf("Is %d a leaf: %d\n", node->n, leaf);
+	else
+		printf("Is (nil) a leaf: %d\n", leaf);
+}
+
 /**
  * main - Entry point
  *
@@ -9,21 +27,13 @@
  */
 int main(void)
 {
-    binary_tree_t *root;
-    int ret;
+	binary_tree_t *root;
 
-    root = binary_tree_node(NULL, 98);
-    root->left = binary_tree_node(root, 12);
-    root->right = binary_tree_node(root, 402);
-    binary_tree_insert_right(root->left, 54);
-    binary_tree_insert_right(root, 128);
-    binary_tree_print(root);
+	root = _binary_tree_node(NULL, 98);
+	binary_tree_print(root);
 
-    ret = binary_tree_is_leaf(root);
-    printf("Is %d a leaf: %d\n", root->n, ret);
-    ret = binary_tree_is_leaf(root->right);
-    printf("Is %d a leaf: %d\n", root->right->n, ret);
-    ret = binary_tree_is_leaf(root->right->right);
-    printf("Is %d a leaf: %d\n", root->right->right->n, ret);
-    return (0);
+	test_leaf(root);
+
+	binary_tree_delete(root);
+	return (0);
 }
