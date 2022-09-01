@@ -11,14 +11,14 @@ int b_t_b(const binary_tree_t *tree)
 	int left = 0, right = 0;
 
 	if (!tree)
-		return (0);
+		return (-1);
 
 	left = b_t_b(tree->left);
 	right = b_t_b(tree->right);
 
 	if (left > right)
-		return (right + 1);
-	return (left + 1);
+		return (left + 1);
+	return (right + 1);
 }
 
 /**
