@@ -8,14 +8,21 @@
 
 size_t binary_tree_leaves(const binary_tree_t *tree)
 {
-	size_t counter = 0;
+	int counter = 0;
+	const binary_tree_t *p = tree;
 
 	if (!tree)
 		return (0);
-	counter++;
-	if (tree->right)
+	while (p)
+	{
 		counter++;
-	if (tree->right)
+		p = p->left;
+	}
+	p = tree;
+	while (p)
+	{
 		counter++;
+		p = p->right;
+	}
 	return (counter);
 }
