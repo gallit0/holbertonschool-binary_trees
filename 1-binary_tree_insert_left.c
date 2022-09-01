@@ -23,6 +23,6 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	}
 	parent->left = newNode; /* replace previous info + insert */
 	newNode->parent = parent; /* complete info */
-	newNode->value = value;
+	newNode->n = value;
 	return (newNode);
 }
