@@ -1,26 +1,21 @@
 #include "binary_trees.h"
-
 /**
- * b_t_b - balance of tree
+ * binary_tree_size - size of tree
  * @tree: binary tree
- * Return: int
+ * Return: size_t
  */
 
-int b_t_b(const binary_tree_t *tree)
+size_t binary_tree_size(const binary_tree_t *tree)
 {
-	int left = 0, right = 0;
+	int size = 0;
 
 	if (!tree)
-		return (-1);
+		return (0);
 
-	left = b_t_b(tree->left);
-	right = b_t_b(tree->right);
-
-	if (left > right)
-		return (left + 1);
-	return (right + 1);
+	size += binary_tree_size(tree->right) + 1;
+	size += binary_tree_size(tree->left);
+	return (size);
 }
-
 /**
  * binary_tree_is_perfect - checks if tree is perfect
  * @tree: binary tree
@@ -33,8 +28,8 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 	if (!tree)
 		return (0);
-	l = b_t_b(tree->left);
-	r = b_t_b(tree->right);
+	l = binary_tree_size(tree->left);
+	r = binary_tree_size(tree->right);
 
 	if (l > r || l < r)
 		return (0);
