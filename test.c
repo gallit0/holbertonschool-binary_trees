@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include "binary_trees.h"
 
-/* Our own functions */
-binary_tree_t *_binary_tree_node(binary_tree_t *parent, int value);
-void binary_tree_print(const binary_tree_t *tree);
-void _binary_tree_delete(binary_tree_t *tree);
-
 /**
  * main - Entry point
  *
@@ -14,22 +9,25 @@ void _binary_tree_delete(binary_tree_t *tree);
  */
 int main(void)
 {
-	binary_tree_t *root;
-	int balance;
+    binary_tree_t *root;
+    binary_tree_t *uncle;
 
-	root = binary_tree_node(NULL, 98);
-	root->left = binary_tree_node(root, 50);
-	/*root->right = _binary_tree_node(root, 100);*/
-	root->left->left = binary_tree_node(root->left, 40);
-	root->left->right = binary_tree_node(root->left, 60);
-	/*root->right->left = _binary_tree_node(root->right, 99);*/
-	/*root->right->right = _binary_tree_node(root->right, 110);*/
-	root->left->right->left = binary_tree_node(root->left->right, 55);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 128);
+    root->left->right = binary_tree_node(root->left, 54);
+    root->right->right = binary_tree_node(root->right, 402);
+    root->left->left = binary_tree_node(root->left, 10);
+    root->right->left = binary_tree_node(root->right, 110);
+    root->right->right->left = binary_tree_node(root->right->right, 200);
+    root->right->right->right = binary_tree_node(root->right->right, 512);
 
-	balance = binary_tree_balance(root);
-	printf("Balance factor for tree with root node (%d): %+d\n", root->n, balance);
-
-	binary_tree_print(root);
-	binary_tree_delete(root);
-	return (0);
+    binary_tree_print(root);
+    uncle = binary_tree_uncle(root->right->left);
+    printf("Uncle of %d: %d\n", root->right->left->n, uncle->n);
+    uncle = binary_tree_uncle(root->left->right);
+    printf("Uncle of %d: %d\n", root->left->right->n, uncle->n);
+    uncle = binary_tree_uncle(root->left);
+    printf("Uncle of %d: %p\n", root->left->n, (void *)uncle);
+    return (0);
 }
